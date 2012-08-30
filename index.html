@@ -1,0 +1,100 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title></title>
+  <meta name="description" content="">
+
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="css/cart.css">
+
+  <script src="js/libs/modernizr-2.5.3.min.js"></script>
+</head>
+<body>
+  <!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
+  <header>
+    ndefined - JSCart
+  </header>
+  <div role="main">
+    <h1>JSCart</h1>
+    <ul>
+        <li>One World Whey - Vanilla <a href="#" onclick='ncart.addItem({name: "One World Whey - Vanilla", price: 154.00, weight: 5, quantity: 1, description: ""})'>Add to Cart</a></li>
+        <li>One World Whey - Chocolate <a href="#" onclick='ncart.addItem({name: "One World Whey - Chocolate", price: 154.00, weight: 5, quantity: 1, description: ""})'>Add to Cart</a></li>
+        <li>One World Whey - Strawberry <a href="#" onclick='ncart.addItem({name: "One World Whey - Strawberry", price: 154.00, weight: 5, quantity: 1, description: ""})'>Add to Cart</a></li>
+    </ul>
+    <ul>
+        <li>GF All Purpose Baking Flour <a href="#" onclick='ncart.addItem({name: "GF All Purpose Baking Flour", price: 8.75, weight: 3, quantity: 1, description: ""})'>Add to Cart</a></li>
+        <li>GF Chocolate Chip Cookie Mix <a href="#" onclick='ncart.addItem({name: "GF Chocolate Chip Cookie Mix", price: 154.00, weight: 4, quantity: 1, description: ""})'>Add to Cart</a></li>
+    </ul>
+  </div>
+  <footer>
+
+  </footer>
+
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.1.min.js"><\/script>')</script>
+  <script src="js/plugins.js"></script>
+  <script src="js/libs/jqmodal.js"></script>
+  <script src="js/libs/handlebars.js"></script>
+  <script src="js/ncart.js"></script>
+  <script id="ndefined-cartlayout" type="text/x-handlebars-template">
+      <div id='ndefined_cart_body'>
+        <header>View Cart <span id='ndefined_cart_totalItems'>({{totalItemCount}})</span></header>
+        <div id='ndefined_cart_content' style='display:block;'>
+            <ul class='ndefined_cart_items'>{{{items}}}</ul>
+            <div class='ndefined_cart_checkout'>Your zip:<input type='text' size='5' id='ndefined_cart_zip'></div>
+            <div id='ndefined_cart_shipping_est' class='priceLine'>
+                <span class='ndefined_cart_shipping'>{{shipping}}</span>
+                <span class='ndefined_cart_text'>Shipping:</span>
+            </div>
+            <div id='ndefined_cart_subTotal' class='priceLine'>
+                <span class='ndefined_cart_subtotal'>{{subtotal}}<br>{{total}}</span>
+                <span class='ndefined_cart_text'>Subtotal:<br>Total:</span>
+            </div>
+            <a href='#' id='ndefined_cart_checkout_now'>Checkout</a>
+            <div id='ndefined_cart_checkout' style='display: none;'>
+            </div>
+        </div>
+      </div>
+  </script>
+  <script id="ndefined-item" type="text/x-handlebars-template">
+    <li id='ndefined_cart_item_{{itemID}}' class='ndefined_cart_item'>
+        <span class='ndefined_cart_quantity'><input type='text' value='{{itemQuantity}}' size='2' id='ndefined_cart_q_{{itemID}}' data='{{itemID}}'></span>
+        <span class='ndefined_cart_name'>{{itemName}} | {{itemWeight}}lbs. </span>
+        <span id='ndefined_cart_item_wieght_{{itemID}}' class='ndefined_cart_weightwrapper'>({{itemTotalWeight}} lbs)</span>
+        <span class='ndefined_cart_pricewrapper'>
+            <span id='ndefined_cart_item_{{itemID}}_price' class='ndefined_cart_price'>{{itemTotalPrice}}</span>
+            <br>
+            <a href='#' data='{{itemID}}' class='ndefined_cart_remove'>Remove</a>
+        </span>
+    </li>
+  </script>
+  <script id="ndefined-checkout" type="text/x-handlebars-template">
+        <h3>Checkout with PayPal</h3>
+        <div class='ndefined_cart_paypal'>
+        <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+             <input type="hidden" name="cmd" value="_xclick">
+             <input type="hidden" name="business" value="{{paypal}}">
+             <input type="hidden" name="lc" value="US">
+             <input type="hidden" name="item_name" value="{{itemName}}">
+             <input type="hidden" name="item_name" value="{{itemName}}">
+             <input type="hidden" name="amount" value="{{itemPrice}}">
+             <input type="hidden" name="currency_code" value="USD">
+             <input type="hidden" name="button_subtype" value="products">
+             <input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted">
+             <input type="image" src="https://www.paypal.com/en_US/i/btn/btn_buynowCC_LG.gif"
+             border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+             <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+        </form> 
+        </div>
+        <h3>Checkout with Google Checkout</h3>
+        <div class='ndefined_cart_googleCheckout'>{{googleCheckout}}</div>
+  </script>
+  <script src="js/script.js"></script>
+</body>
+</html>
